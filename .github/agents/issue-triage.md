@@ -1,9 +1,10 @@
 ---
-agent: claude
-model: claude-sonnet-4-6
+engine:
+  id: claude
+  model: claude-sonnet-4-6
 tools:
-  - github
-  - web-search
+  github:
+  web-search:
 on:
   issues:
     types: [opened]
