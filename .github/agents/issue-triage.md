@@ -8,6 +8,7 @@ tools:
 on:
   issues:
     types: [opened]
+  workflow_dispatch:
 ---
 
 # Issue Triage Agent
