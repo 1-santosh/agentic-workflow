@@ -1,14 +1,35 @@
 ---
-engine:
-  id: claude
-  model: claude-sonnet-4-6
-tools:
-  github:
-  web-search:
+description: |
+  Issue triage agent that runs when new issues are opened. Analyzes the issue,
+  assigns type and priority labels, and posts a summary comment with next steps.
+
 on:
   issues:
     types: [opened]
   workflow_dispatch:
+
+permissions:
+  contents: read
+  issues: write
+
+network: defaults
+
+safe-outputs:
+  add-labels:
+    max: 5
+  add-comment:
+
+tools:
+  github:
+    toolsets: [issues]
+    lockdown: false
+  web-search:
+
+engine:
+  id: claude
+  model: claude-sonnet-4-6
+
+timeout-minutes: 10
 ---
 
 # Issue Triage Agent
