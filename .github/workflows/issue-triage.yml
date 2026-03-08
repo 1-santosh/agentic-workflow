@@ -3,7 +3,7 @@ name: Issue Triage Agent
 on:
   issues:
     types: [opened]
-  workflow_dispatch:  # allows manual trigger from Actions tab
+  workflow_dispatch:
 
 permissions:
   issues: write
@@ -18,6 +18,12 @@ jobs:
       - name: Install GitHub Agentic Workflows CLI
         run: |
           gh extension install github/gh-aw
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Compile Agent Workflow
+        run: |
+          gh aw compile .github/agents/issue-triage.md
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
