@@ -1,0 +1,29 @@
+name: Issue Triage Agent
+
+on:
+  issues:
+    types: [opened]
+  workflow_dispatch:  # allows manual trigger from Actions tab
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  triage:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install GitHub Agentic Workflows CLI
+        run: |
+          gh extension install github/gh-aw
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Run Issue Triage Agent
+        run: |
+          gh aw run .github/agents/issue-triage.md
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.AGENTS_POC }}
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
