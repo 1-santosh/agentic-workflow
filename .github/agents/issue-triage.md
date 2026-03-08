@@ -4,8 +4,9 @@ model: claude-sonnet-4-6
 tools:
   - github
   - web-search
-triggers:
-  - issues.opened
+on:
+  issues:
+    types: [opened]
 ---
 
 # Issue Triage Agent
