@@ -14,7 +14,7 @@ network: defaults
 
 permissions:
   contents: read
-  issues: write
+  issues: read
 
 safe-outputs:
   add-labels:
