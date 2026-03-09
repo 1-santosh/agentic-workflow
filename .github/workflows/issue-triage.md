@@ -8,11 +8,13 @@ on:
     types: [opened]
   workflow_dispatch:
 
+timeout-minutes: 10
+
+network: defaults
+
 permissions:
   contents: read
   issues: write
-
-network: defaults
 
 safe-outputs:
   add-labels:
@@ -28,8 +30,6 @@ tools:
 engine:
   id: claude
   model: claude-sonnet-4-6
-
-timeout-minutes: 10
 ---
 
 # Issue Triage Agent
