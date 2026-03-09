@@ -23,13 +23,16 @@ jobs:
 
       - name: Compile Agent Workflow
         run: |
-          gh aw compile .github/agents/issue-triage.md
+          gh aw compile issue-triage
+          if [ ! -f .github/workflows/issue-triage.lock.yml ]; then
+            echo "::error::Lock file was not created. Check compile output above."
+            exit 1
+          fi
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run Issue Triage Agent
-        run: |
-          gh aw run .github/agents/issue-triage.md
+        run: gh aw run .github/workflows/issue-triage.md
         env:
           ANTHROPIC_API_KEY: ${{ secrets.AGENTS_POC }}
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
